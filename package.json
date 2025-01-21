@@ -1,0 +1,14 @@
+{
+	"name" : "com.parable.virdy-sdk",
+	"displayName" : "VIRDY SDK",
+	"version" : "0.0.2",
+	"unity" : "2022.3",
+	"description" : "VIRDY SDK for building worlds",
+	"dependencies" : {
+		"com.unity.cinemachine" : "2.9.7"
+	},
+	"author" : {
+		"name" : "PARABLE Ent.",
+		"email" : "metaverse.parable@gmail.com"
+	}
+}
