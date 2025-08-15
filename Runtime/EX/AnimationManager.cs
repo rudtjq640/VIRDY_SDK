@@ -1,63 +1,99 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class AnimationManager : MonoBehaviour
 {
-    private Animator _animator;
-    private string targetObjectName = "JingAnim";
-    private bool objectFound = false;
+    [System.Serializable]
+    public class AnimationTarget
+    {
+        public string ObjectName;
+        public string OpenTrigger = "Open";
+        public string CloseTrigger = "Close";
+
+        [HideInInspector] public Animator animator;
+        [HideInInspector] public bool isFound = false;
+        [HideInInspector] public bool isOpen = true;
+    }
+
+    public List<AnimationTarget> targets = new List<AnimationTarget>();
 
     void Start()
     {
-        // 시작할 때 오브젝트를 찾음
-        FindTargetObject();
+        foreach (var t in targets)
+        {
+            t.isFound = false;
+            t.animator = null;
+        }
     }
 
     void Update()
     {
-        // 오브젝트가 아직 발견되지 않은 경우에만 지속적으로 탐색
-        if (!objectFound)
+        foreach (var t in targets)
         {
-            FindTargetObject();
+            if (!t.isFound)
+                FindAndCacheAnimator(t);
         }
     }
 
-    private void FindTargetObject()
+    private void FindAndCacheAnimator(AnimationTarget target)
     {
-        // 현재 활성화된 씬에서 오브젝트를 찾음
-        foreach (var rootGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
+        foreach (var root in SceneManager.GetActiveScene().GetRootGameObjects())
         {
-            foreach (var transform in rootGameObject.GetComponentsInChildren<Transform>())
+            foreach (var tr in root.GetComponentsInChildren<Transform>(true))
             {
-                if (transform.name == targetObjectName)
+                if (tr.name == target.ObjectName)
                 {
-                    _animator = transform.GetComponent<Animator>();
-                    if (_animator != null)
+                    var anim = tr.GetComponent<Animator>();
+                    if (anim != null)
                     {
-                        objectFound = true; // 오브젝트를 찾았으므로 다시 탐색하지 않음
-                        Debug.Log($"{targetObjectName} 오브젝트와 Animator를 찾았습니다.");
-                        return; // 오브젝트를 찾았으면 더 이상 반복하지 않음
+                        target.animator = anim;
+                        target.isFound = true;
+                        return;
                     }
                 }
             }
         }
     }
 
-    public void PlayOpenAnimation()
+    public void PlayOpenAnimation(string ObjectName)
     {
-        if (_animator != null)
+        var t = targets.Find(x => x.ObjectName == ObjectName);
+        if (t != null && t.isFound)
         {
-            _animator.SetTrigger("Open");
-            Debug.Log("Open 애니메이션을 재생합니다.");
+            if (t.isOpen) return;
+            else
+            {
+                t.animator.SetTrigger(t.OpenTrigger);
+                t.isOpen = true;
+            }
         }
+        else
+            Debug.LogWarning($"[AnimationManager] '{ObjectName}' or its Animator not found.");
     }
 
-    public void PlayCloseAnimation()
+    public void PlayCloseAnimation(string ObjectName)
     {
-        if (_animator != null)
+        var t = targets.Find(x => x.ObjectName == ObjectName);
+        if (t != null && t.isFound)
         {
-            _animator.SetTrigger("Close");
-            Debug.Log("Close 애니메이션을 재생합니다.");
+            if (!t.isOpen) return;
+            else
+            {
+                t.animator.SetTrigger(t.CloseTrigger);
+                t.isOpen = false;
+            }
         }
+        else
+            Debug.LogWarning($"[AnimationManager] '{ObjectName}' or its Animator not found.");
+    }
+
+    public void PlayTrigger(string ObjectName, string triggerName)
+    {
+        var t = targets.Find(x => x.ObjectName == ObjectName);
+        if (t != null && t.isFound)
+            t.animator.SetTrigger(triggerName);
+        else
+            Debug.LogWarning($"[AnimationManager] '{ObjectName}' or its Animator not found.");
     }
 }

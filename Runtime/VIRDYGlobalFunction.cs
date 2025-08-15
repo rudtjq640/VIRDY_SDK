@@ -17,6 +17,7 @@ namespace VIRDY.SDK
             var function = Functions.Find(f => f.Key == key);
             if (function != null) function.Function?.Invoke();
         }
+
     }
 
     [Serializable]

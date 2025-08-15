@@ -1,47 +1,59 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 namespace VIRDY.SDK
 {
     public class VIRDYObjectActivator : MonoBehaviour
     {
-        public List<string> targetObjectNames = new List<string>();  // Ã£°íÀÚ ÇÏ´Â ¿ÀºêÁ§Æ® ÀÌ¸§ ¸ñ·Ï
+        public List<string> targetObjectNames = new List<string>();
 
-        // ¸ğµç ´ë»ó ¿ÀºêÁ§Æ®¸¦ È°¼ºÈ­
+        // í•´ë‹¹ ì”¬ì—ì„œë§Œ ë™ì‘í•˜ë„ë¡ Awake ì‹œì ì— ì”¬ ì •ë³´ ì €ì¥
+        private Scene _owningScene;
+
+        private void Awake()
+        {
+            _owningScene = gameObject.scene;
+        }
+
+        // ëª¨ë“  ëŒ€ìƒ ì˜¤ë¸Œì íŠ¸ë¥¼ í™œì„±í™”
         public void ActivateObjects()
         {
-            foreach (GameObject obj in FindTargetObjects())
-            {
+            foreach (var obj in FindTargetObjects())
                 obj.SetActive(true);
-            }
         }
 
-        // ¸ğµç ´ë»ó ¿ÀºêÁ§Æ®¸¦ ºñÈ°¼ºÈ­
+        // ëª¨ë“  ëŒ€ìƒ ì˜¤ë¸Œì íŠ¸ë¥¼ ë¹„í™œì„±í™”
         public void DeactivateObjects()
         {
-            foreach (GameObject obj in FindTargetObjects())
-            {
+            foreach (var obj in FindTargetObjects())
                 obj.SetActive(false);
-            }
         }
 
-        // ¾À ³»¿¡¼­ Æ¯Á¤ ÀÌ¸§À» °¡Áø ¿ÀºêÁ§Æ® Ã£±â
+        // ì´ ì»´í¬ë„ŒíŠ¸ê°€ ì†í•œ ì”¬ì—ì„œë§Œ, ì´ë¦„ í•„í„°ì— ê±¸ë¦¬ëŠ” ì˜¤ë¸Œì íŠ¸ ì°¾ê¸°
         private List<GameObject> FindTargetObjects()
         {
-            List<GameObject> targetObjects = new List<GameObject>();
-            GameObject[] allObjects = FindObjectsOfType<GameObject>(true); // ºñÈ°¼ºÈ­µÈ ¿ÀºêÁ§Æ®¸¦ Æ÷ÇÔÇÏ¿© ¸ğµç GameObject Ã£±â
-            foreach (GameObject obj in allObjects)
+            var targetObjects = new List<GameObject>();
+            // ë¹„í™œì„±í™”ëœ ì˜¤ë¸Œì íŠ¸ê¹Œì§€ í¬í•¨í•´ì„œ ì”¬ ì „ì²´ë¥¼ ë’¤ì§€ê¸° ìœ„í•´ ëª¨ë“  GameObject ê°€ì ¸ì˜¤ê¸°
+            var allObjects = FindObjectsOfType<GameObject>(true);
+
+            foreach (var obj in allObjects)
             {
-                // ¿ÀºêÁ§Æ®ÀÇ ÀÌ¸§ÀÌ targetObjectNames ¸®½ºÆ®¿¡ ÀÖ´ÂÁö È®ÀÎ
-                foreach (string targetName in targetObjectNames)
+                // ì”¬ì´ ë‹¤ë¥´ë©´ ê±´ë„ˆë›°ê¸°
+                if (obj.scene != _owningScene)
+                    continue;
+
+                // ì´ë¦„ í‚¤ì›Œë“œ ê²€ì‚¬
+                foreach (var key in targetObjectNames)
                 {
-                    if (obj.name.Contains(targetName))
+                    if (!string.IsNullOrEmpty(key) && obj.name.Contains(key))
                     {
                         targetObjects.Add(obj);
-                        break; // ÀÌ¹Ì Ã£Àº ¿ÀºêÁ§Æ®ÀÌ¹Ç·Î Ãß°¡ °Ë»ö ÁßÁö
+                        break;
                     }
                 }
             }
+
             return targetObjects;
         }
     }
