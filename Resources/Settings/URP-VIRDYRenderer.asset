@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8516895517242395906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6fa1bb20d86b504a8f548ab666efb96, type: 3}
+  m_Name: ToonLitRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  m_RendererData: {fileID: 11400000, guid: 81e7d5563c9f8ce43ac018d59b103c9b, type: 2}
+--- !u!114 &-7033827613360480822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a9a4847a92104072b352fe44da35cbb, type: 3}
+  m_Name: Volumetric Lights
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  shader: {fileID: 4800000, guid: 6b7e6acc194204408b3294f5c220fc1e, type: 3}
+  blendMode: 0
+  renderPassEvent: 450
+  downscaling: 1
+  blurPasses: 1
+  blurDownscaling: 1
+  blurSpread: 1
+  blurHDR: 1
+  blurEdgePreserve: 0
+  blurEdgeDepthThreshold: 0.001
+  brightness: 1
+  ditherStrength: 0
+--- !u!114 &-4086759119811203682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7c2c2c3c19808149a4d3454e1019255, type: 3}
+  m_Name: HBAO
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  shader: {fileID: 0}
 --- !u!114 &-1878332245247344467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,7 +106,13 @@ MonoBehaviour:
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
   - {fileID: -1878332245247344467}
-  m_RendererFeatureMap: adc0de57c6d2eee5
+  - {fileID: -4086759119811203682}
+  - {fileID: 4455520327183370982}
+  - {fileID: 722088934817342764}
+  - {fileID: -8516895517242395906}
+  - {fileID: -7033827613360480822}
+  - {fileID: 6836561948847038453}
+  m_RendererFeatureMap: adc0de57c6d2eee59ead10ad3bea48c7e60a4c972130d53d2c2507780f60050afe72a6c9a6e8cd89ca9d506e0dd3629ef5dffaedde58e05e
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -79,10 +138,10 @@ MonoBehaviour:
   m_AssetVersion: 2
   m_OpaqueLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1073748087
   m_TransparentLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1073748087
   m_DefaultStencilState:
     overrideStencilState: 0
     stencilReference: 0
@@ -96,6 +155,27 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &722088934817342764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf716a1be50b448e7b1d1968ab734946, type: 3}
+  m_Name: ShinySSRR
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  renderPassEvent: 500
+  useDeferred: 0
+  enableScreenSpaceNormalsPass: 0
+  customSmoothnessMetallicPass: 0
+  ignorePostProcessingOption: 1
+  cameraLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &2480933841624126704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,3 +212,90 @@ MonoBehaviour:
     outlineWidthExtraMultiplierForXR: 0.5
     AllowRenderScreenSpaceOutline: 0
     AllowRenderScreenSpaceOutlineInSceneView: 0
+--- !u!114 &4455520327183370982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ad20adf61393c4428c8b31cf405bb26, type: 3}
+  m_Name: NiloToonAllInOneRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    outlineSettings:
+      ShouldRenderOutline: 1
+      outlineWidthMultiplier: 1
+      outlineWidthExtraMultiplierForXR: 0.5
+      outlineTintColor: {r: 1, g: 1, b: 1, a: 1}
+      outlineWidthAutoAdjustToCameraDistanceAndFOV: 1
+      allowClassicOutlineInPlanarReflection: 0
+      AllowRenderScreenSpaceOutline: 0
+      AllowRenderScreenSpaceOutlineInSceneView: 0
+      extraThickOutlineRenderTiming: 500
+    MiscSettings:
+      ShouldReceiveURPShadows: 0
+      URPShadowIntensity: 1
+      URPShadowDepthBias: 0
+      URPShadowNormalBiasMultiplier: 1
+      EnableDepthTextureRimLigthAndShadow: 1
+      DepthTextureRimLightAndShadowWidthMultiplier: 1
+      DepthTexRimLightDepthDiffThresholdOffset: 0
+      EnableSkyboxDrawBeforeOpaque: 1
+      ForceMinimumShader: 0
+      ForceMinimumEnviShader: 0
+      ForceNoOutline: 0
+    sphereShadowTestSettings:
+      enableAverageShadow: 0
+    animePostProcessSettings:
+      allowRender: 1
+    uberPostProcessSettings:
+      renderPassEventTimingOffset: 0
+      allowRenderNiloToonBloom: 1
+    charSelfShadowSettings:
+      enableCharSelfShadow: 1
+      useMainLightAsCastShadowDirection: 1
+      shadowAngle: 30
+      shadowLRAngle: 0
+      shadowMapSize: 4096
+      useSoftShadow: 1
+      softShadowQuality: 2
+      useSoftShadowResharpen: 0
+      resharpenStregth: 0.5
+      shadowRange: 10
+      depthBias: 1
+      normalBias: 0.5
+      receiverDepthBias: 1
+      receiverNormalBias: 1
+      useNdotLFix: 1
+      perfectCullingForShadowCasters: 1
+      terrainCrashSafeGuard: 1
+    motionBlurSettings:
+      allowRender: 1
+    forceRenderPrepassBuffer: 0
+    shaderStrippingSettingSO: {fileID: 0}
+--- !u!114 &6836561948847038453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927576baecea04a5aa8be06dc57e6d9e, type: 3}
+  m_Name: Volumetric Fog 2
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  blurShader: {fileID: 4800000, guid: c9391e295126842e589edc35e6cfa61a, type: 3}
+  renderPassEvent: 450
+  fogLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  cameraLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  ignoreReflectionProbes: 1

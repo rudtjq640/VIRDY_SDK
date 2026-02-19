@@ -79,15 +79,39 @@ namespace VIRDY.SDK
             List.RemoveWindow();
 
             var windowTexture = List.WindowTexture;
-            windowTexture.window = Window;
-            _windowTexture = windowTexture;
+            if (windowTexture != null)
+            {
+                windowTexture.window = Window;
+                _windowTexture = windowTexture;
+            }
+
+            else
+            {
+                UwcWindowTexture[] windowTextures = List.WindowTextures;
+                foreach (var _windowTextures in windowTextures)
+                {
+                    _windowTextures.window = Window;
+                }
+                _windowTexture = windowTextures[0];
+            }
             _image.color = selected;
         }
 
         public void RemoveWindow()
         {
             var windowTexture = List.WindowTexture;
-            windowTexture.window = null;
+            if (windowTexture != null)
+            {
+                windowTexture.window = null;
+            }
+            else
+            {
+                UwcWindowTexture[] windowTextures = List.WindowTextures;
+                foreach (var _windowTextures in windowTextures)
+                {
+                    _windowTextures.window = null;
+                }
+            }
             _windowTexture = null;
             _image.color = notSelected;
         }

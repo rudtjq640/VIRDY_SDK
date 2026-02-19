@@ -9,7 +9,10 @@ namespace VIRDY.SDK
     public class VIRDYUwcWindowList : VIRDYBehaviour
     {
 #if VIRDY_UWC
+        [HideInInspector]
         public UwcWindowTexture WindowTexture;
+
+        public UwcWindowTexture[] WindowTextures;
 
         [Space]
 

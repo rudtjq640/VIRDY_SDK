@@ -18,6 +18,20 @@ namespace VIRDY.SDK
             if (function != null) function.Function?.Invoke();
         }
 
+        [Rpc(RpcSources.All, RpcTargets.All, Channel = RpcChannel.Reliable)]
+        public void RPC_ExecuteFunction(string key, int value)
+        {
+            var function = Functions.Find(f => f.Key == key);
+            if (function != null) function.FunctionInt?.Invoke(value);
+        }
+        
+        [Rpc(RpcSources.All, RpcTargets.All, Channel = RpcChannel.Reliable)]
+        public void RPC_ExecuteFunction(string key, string value)
+        {
+            var function = Functions.Find(f => f.Key == key);
+            if (function != null) function.FunctionString?.Invoke(value);
+        }
+
     }
 
     [Serializable]
@@ -26,5 +40,7 @@ namespace VIRDY.SDK
         public string Key;
 
         public UnityEvent Function = new UnityEvent();
+        public UnityEvent<int> FunctionInt = new UnityEvent<int>();
+        public UnityEvent<string> FunctionString = new UnityEvent<string>();
     }
 }
