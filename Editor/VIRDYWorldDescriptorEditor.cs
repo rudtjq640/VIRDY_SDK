@@ -38,6 +38,8 @@ public class VIRDYWorldDescriptorEditor : SRDataEditor
         if (_worldDescriptor == null) _worldDescriptor = (VIRDYWorldDescriptor)target;
 
 #if !VIRDY_CORE
+        if (_worldDescriptor.SpawnPoint == null) _worldDescriptor.SpawnPoint = _worldDescriptor.transform;
+
         if (_worldDescriptor.RendererData == null) _worldDescriptor.RendererData = (UniversalRendererData)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath("9f357787aaebbc44880985fd33cc3391"), typeof(UniversalRendererData));
         m_RendererData = _worldDescriptor.RendererData;
 

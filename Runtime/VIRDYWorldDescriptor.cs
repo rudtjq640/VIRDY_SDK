@@ -19,18 +19,7 @@ namespace VIRDY.SDK
 
         private static VIRDYWorldDescriptor _instance;
 
-        [SerializeField]
-        private Transform _spawnPoint;
-        
-        /// <summary>
-        /// 스폰 포인트 Transform. 
-        /// 설정되어 있으면 해당 Transform 사용, 없으면 자기 자신(VIRDYWorldDescriptor) 반환.
-        /// </summary>
-        public Transform SpawnPoint
-        {
-            get => _spawnPoint != null ? _spawnPoint : transform;
-            set => _spawnPoint = value;
-        }
+        public Transform SpawnPoint;
 
         public UniversalRendererData RendererData;
 

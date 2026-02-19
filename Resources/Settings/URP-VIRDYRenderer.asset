@@ -39,6 +39,7 @@ MonoBehaviour:
   blurEdgeDepthThreshold: 0.001
   brightness: 1
   ditherStrength: 0
+  ignoreOverlayCamera: 1
 --- !u!114 &-4086759119811203682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,13 +107,9 @@ MonoBehaviour:
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
   - {fileID: -1878332245247344467}
-  - {fileID: -4086759119811203682}
   - {fileID: 4455520327183370982}
-  - {fileID: 722088934817342764}
-  - {fileID: -8516895517242395906}
   - {fileID: -7033827613360480822}
-  - {fileID: 6836561948847038453}
-  m_RendererFeatureMap: adc0de57c6d2eee59ead10ad3bea48c7e60a4c972130d53d2c2507780f60050afe72a6c9a6e8cd89ca9d506e0dd3629ef5dffaedde58e05e
+  m_RendererFeatureMap: adc0de57c6d2eee5e60a4c972130d53dca9d506e0dd3629e
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -134,6 +131,12 @@ MonoBehaviour:
     objectMotionVector: {fileID: 4800000, guid: 7b3ede40266cd49a395def176e1bc486,
       type: 3}
     dataDrivenLensFlare: {fileID: 4800000, guid: 6cda457ac28612740adb23da5d39ea92,
+      type: 3}
+    terrainDetailLitPS: {fileID: 4800000, guid: f6783ab646d374f94b199774402a5144,
+      type: 3}
+    terrainDetailGrassPS: {fileID: 4800000, guid: e507fdfead5ca47e8b9a768b51c291a1,
+      type: 3}
+    terrainDetailGrassBillboardPS: {fileID: 4800000, guid: 29868e73b638e48ca99a19ea58c48d90,
       type: 3}
   m_AssetVersion: 2
   m_OpaqueLayerMask:
@@ -172,10 +175,12 @@ MonoBehaviour:
   useDeferred: 0
   enableScreenSpaceNormalsPass: 0
   customSmoothnessMetallicPass: 0
+  customSmoothnessMetallicPassSource: 0
   ignorePostProcessingOption: 1
   cameraLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  ignoreReflectionProbes: 1
 --- !u!114 &2480933841624126704
 MonoBehaviour:
   m_ObjectHideFlags: 0
